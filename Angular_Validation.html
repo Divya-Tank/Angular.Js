@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+   <head>
+      <title>Angular Form Validation</title>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
+   </head>
+   
+   <body ng-app = "myapp" ng-controller = "controller" class="form" >
+         <h2>Welcome to Register page</h2></li><br>
+      
+         <form name="registrationform" ng-model="LoginForm" >
+               Enter your Name:
+               <input type="text" ng-model="name" required><br><br>
+               <span style="color:red" ng-show="registrationform.name.$dirty && registrationform.name.$invalid">
+               <span ng-show="registrationform.name.$error.required">Name is required.</span>
+               </span>
+
+               Enter your Mobile number:
+               <input type="number" ng-model="mobile" required><br><br>
+               <span style="color:red" ng-show="registrationform.mobile.$dirty && registrationform.mobile.$invalid">
+               <span ngshow="registrationform.mobile.$error.required">Mobile Number is required.</span>
+               <span ngshow="registrationform.mobile.$error.mobile">Invalid Mobile Number.</span>
+               </span>
+
+               Enter your Email:
+               <input type="email" name="email" ng-model="email" required ng-pattern="/^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/"><br><br>
+               <span style="color:red" ng-show="registrationform.email.$dirty && registrationform.email.$invalid">
+               <span ngshow="registrationform.email.$error.required">Email is required.</span>
+               <span ng-show="registrationform.email.$error.email">Invalid email address.</span>
+               </span>
+
+               Enter your Address:
+               <textarea type="text" rows="3" cols="50" ng-model="address" required></textarea><br><br>
+               <span style="color:red" ng-show="registrationform.address.$dirty &&  registrationform.address.$invalid">
+               <span ngshow="registrationform.address.$error.required">Address is required.</span>
+               </span>
+
+               Enter your Date of birth:
+               <input type="date" ng-model="dob" required><br><br>
+               <span style="color:red" ng-show="registrationform.dob.$dirty && registrationform.dob.$invalid">
+               <span ng-show="registrationform.dob.$error.required">Date of Birth is required.</span>
+               </span>
+
+               Select your Gender:
+               <input type="radio" name="gender" ng-model="gender" checked>Male<input type="radio" name="gender" ng-model="gender">Female<br><br>
+               <span style="color:red" ng-show="registrationform.gender.$dirty && registrationform.gender.$invalid">
+               <span ng-show="registrationform.gender.$error.required">Gender is required.</span>
+               </span>
+
+               Create your Username:
+               <input type="text" ng-model="uname" required><br><br>
+               <span style="color:red" ng-show="registrationform.uname.$dirty && registrationform.uname.$invalid">
+               <span ngshow="registrationform.uname.$error.required">Username is required.</span>
+               </span>
+
+               Create your Password:
+               <input type="password" ng-model="password" required><br><br>
+               <span style="color:red" ng-show="registrationform.password.$dirty && registrationform.password.$invalid">
+               <span ng-show="registrationform.password.$error.required">Password is required.</span>
+               </span>
+
+               Re-enter Password:
+               <input type="password" ng-model="cpassword" equal="{{ registrationform.password }}" required><br><br>
+               <span style="color:red" ng-show="registrationform.cpassword.$dirty && registrationform.cpassword.$invalid">
+               <span ng-show="registrationform.cpassword.$error.required">Password Confirmation is required.</span>
+               <span ng-show="registrationform.cpassword.$error.equal">Password does nor match above.</span>
+               </span>
+
+         <button type="submit" ng-click="validate()" ng-disabled="(registrationform.name.$invalid) || 
+         (registrationform.mobile.$invalid) || (registrationform.email.$invalid) || 
+         (registrationform.address.$invalid) || (registrationform.dob.$invalid) || 
+         (registrationform.gender.$invalid) || (registrationform.uname.$invalid) || 
+         (registrationform.password.$invalid) || (registrationform.cpassword.$invalid)">Submit</button>
+         <button type="reset">Reset</button>
+
+         </form>
+      
+
+         <script>
+            var myapp = angular.module("myapp",[]);
+            
+            myapp.controller("controller", function($scope) {
+               $scope.validate = function() {
+                if ($scope.password == $scope.re_password)
+                {
+                  console.log('Same password');
+                }
+                else
+                {
+                  console.log('Different password');
+                }
+               }
+            });
+            
+          </script>
+   </body>
+
+</html>
